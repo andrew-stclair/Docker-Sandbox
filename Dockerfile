@@ -26,10 +26,10 @@ RUN yum -y install tigervnc-server tigervnc-server-minimal
 RUN yum -y install file-roller
 RUN yum -y install java
 RUN dbus-uuidgen > /var/lib/dbus/machine-id
-RUN printf "${password}\n${password}\n\n" | vncpasswd
+RUN printf "password\npassword\n\n" | vncpasswd
 RUN vncserver -rfbport 5902
 RUN vncserver -kill :1
-RUN mv ~/.vnc/xstartup ~/.vnc/xstartup.backup
+# RUN mv ~/.vnc/xstartup ~/.vnc/xstartup.backup
 RUN echo '#!/bin/bash' > ~/.vnc/xstartup
 RUN echo 'xrdb $HOME/.Xresources' >> ~/.vnc/xstartup
 RUN echo 'startxfce4 &' >> ~/.vnc/xstartup
